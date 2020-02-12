@@ -9,6 +9,6 @@ variable "master_count" {default = 1}
 variable "etcd_count" {default = 1}
 variable "datacenter" { }
 variable "pool" { }
-variable "template " { }
+variable "template" { }
 variable "network" { }
 variable "datastore" { }
