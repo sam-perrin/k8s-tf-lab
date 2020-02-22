@@ -31,7 +31,7 @@ resource "vsphere_virtual_machine" "master2" {
         }
 
         network_interface {
-          ipv4_address = "192.168.10.19${count.index + 3}"
+          ipv4_address = "192.168.118.15${count.index + 3}"
           ipv4_netmask = 24
         }
 
@@ -43,7 +43,8 @@ resource "vsphere_virtual_machine" "master2" {
   connection {
     type = "ssh"
     user = "terraform"
-    private_key = "${file("keys/terraform_id_rsa")}"
+    password = "terraform"
+    # private_key = "${file("keys/terraform_id_rsa")}"
     host = "master2${count.index + 1}.${var.dns_suffixes}"
   }
   provisioner "remote-exec" {
