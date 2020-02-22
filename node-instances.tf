@@ -1,4 +1,4 @@
-resource "vsphere_virtual_machine" "node2" {
+resource "vsphere_virtual_machine" "node0" {
   count = "${var.node_count}"
   name             = "node0${count.index + 1}"
   resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
@@ -45,7 +45,7 @@ resource "vsphere_virtual_machine" "node2" {
     user = "terraform"
     password = "terraform"
     # private_key = "${file("keys/terraform_id_rsa")}"
-    host = "node2${count.index + 1}.${var.dns_suffixes}"
+    host = "node0${count.index + 1}.${var.dns_suffixes}"
   }
   provisioner "remote-exec" {
     script = "scripts/bootstrap-node.sh"

@@ -1,4 +1,4 @@
-resource "vsphere_virtual_machine" "master2" {
+resource "vsphere_virtual_machine" "master0" {
   count = "${var.master_count}"
   name             = "master0${count.index + 1}"
   resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
@@ -45,7 +45,7 @@ resource "vsphere_virtual_machine" "master2" {
     user = "terraform"
     password = "terraform"
     # private_key = "${file("keys/terraform_id_rsa")}"
-    host = "master2${count.index + 1}.${var.dns_suffixes}"
+    host = "master0${count.index + 1}.${var.dns_suffixes}"
   }
   provisioner "remote-exec" {
     script = "scripts/bootstrap-master.sh"

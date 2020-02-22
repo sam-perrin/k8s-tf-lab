@@ -1,4 +1,4 @@
-resource "vsphere_virtual_machine" "etcd2" {
+resource "vsphere_virtual_machine" "etcd0" {
   count = "${var.etcd_count}"
   name             = "etcd0${count.index + 1}"
   resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
@@ -45,7 +45,7 @@ resource "vsphere_virtual_machine" "etcd2" {
     user = "terraform"
     password = "terraform"
     #private_key = "${file("keys/terraform_id_rsa")}"
-    host = "etcd2${count.index + 1}.${var.dns_suffixes}"
+    host = "etcd0${count.index + 1}.${var.dns_suffixes}"
   }
   provisioner "remote-exec" {
     script = "scripts/swapoff.sh"
