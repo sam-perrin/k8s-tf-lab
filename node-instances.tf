@@ -1,6 +1,6 @@
 resource "vsphere_virtual_machine" "node2" {
   count = "${var.node_count}"
-  name             = "node2${count.index + 1}"
+  name             = "node0${count.index + 1}"
   resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
   datastore_id     = "${data.vsphere_datastore.datastore.id}"
   folder = "Kubernetes"
@@ -26,7 +26,7 @@ resource "vsphere_virtual_machine" "node2" {
       template_uuid = "${data.vsphere_virtual_machine.template.id}"
       customize {
         linux_options {
-          host_name = "node2${count.index + 1}"
+          host_name = "node0${count.index + 1}"
           domain    = "${var.dns_suffixes}"
         }
 
