@@ -54,8 +54,9 @@ resource "vsphere_virtual_machine" "master0" {
   provisioner "remote-exec" {
     inline = [
       "echo ${var.ssh_pass} | sudo -S apt-get update",
-      "chmod +x /tmp/bootstrap-master.sh",
-      "sudo ./tmp/bootstrap-master.sh"
+      "cd /tmp/",
+      "chmod +x bootstrap-master.sh",
+      "sudo ./bootstrap-master.sh"
     ]
   }
 

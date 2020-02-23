@@ -54,8 +54,9 @@ resource "vsphere_virtual_machine" "etcd0" {
   provisioner "remote-exec" {
     inline = [
       "echo ${var.ssh_pass} | sudo -S apt-get update",
-      "chmod +x /tmp/swapoff.sh",
-      "sudo ./tmp/swapoff.sh"
+      "cd /tmp/",
+      "chmod +x swapoff.sh",
+      "sudo ./swapoff.sh"
     ]
   }
 }
