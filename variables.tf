@@ -12,3 +12,4 @@ variable "pool" {  default = "Resources"}
 variable "template" { default = "ubuntu1604-template"}
 variable "network" { default = "VM Network"}
 variable "datastore" { default = "Datastore"}
+variable "ssh_pass" { }
