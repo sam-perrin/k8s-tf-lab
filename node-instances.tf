@@ -54,7 +54,8 @@ resource "vsphere_virtual_machine" "node0" {
   provisioner "remote-exec" {
     inline = [
       "echo ${var.ssh_pass} | sudo -S apt-get update",
-      "sudo /tmp/bootstrap-node.sh"
+      "chmod +x /tmp/bootstrap-node.sh",
+      "sudo ./tmp/bootstrap-node.sh"
     ]
   }
 }
