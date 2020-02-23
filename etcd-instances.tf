@@ -47,14 +47,14 @@ resource "vsphere_virtual_machine" "etcd0" {
     #private_key = "${file("keys/terraform_id_rsa")}"
     host = "etcd0${count.index + 1}.${var.dns_suffixes}"
   }
-
+  provisioner "file" {
+    source      = "scripts/swapoff.sh"
+    destination = "/tmp/swapoff.sh"
+  }
   provisioner "remote-exec" {
     inline = [
       "echo ${var.ssh_pass} | sudo -S apt-get update",
-      "sudo apt-get install -y curl"
+      "sudo /tmp/swapoff.sh"
     ]
-  }
-  provisioner "remote-exec" {
-    script = "scripts/swapoff.sh"
   }
 }

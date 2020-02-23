@@ -47,13 +47,15 @@ resource "vsphere_virtual_machine" "master0" {
     # private_key = "${file("keys/terraform_id_rsa")}"
     host = "master0${count.index + 1}.${var.dns_suffixes}"
   }
+  provisioner "file" {
+    source      = "scripts/bootstrap-master.sh"
+    destination = "/tmp/bootstrap-master.sh"
+  }
   provisioner "remote-exec" {
     inline = [
       "echo ${var.ssh_pass} | sudo -S apt-get update",
-      "sudo apt-get install -y curl"
+      "sudo /tmp/bootstrap-master.sh"
     ]
   }
-  provisioner "remote-exec" {
-    script = "scripts/bootstrap-master.sh"
-  }
+
 }
